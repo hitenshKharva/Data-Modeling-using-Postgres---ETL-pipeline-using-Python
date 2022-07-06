@@ -92,15 +92,3 @@ There is one main **fact table** containing all the measures associated to each 
  ```
 python etl.py
 ```
-
-### Finally I test song and artist id from their tables by song name, artist name and song duration that we have on our song play dataset. The magic query used is the following:
-
-```
-
-        %SELECT song_id, artists.artist_id
-        FROM songs JOIN artists ON songs.artist_id = artists.artist_id
-        WHERE songs.title = %s
-        AND artists.name = %s
-        AND songs.duration = %s
- 
-```
