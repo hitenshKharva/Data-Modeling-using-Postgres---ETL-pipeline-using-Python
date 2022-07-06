@@ -45,48 +45,30 @@ The schema I used is the Star Schema:
 There is one main **fact table** containing all the measures associated to each event (user song plays), and 4 **dimensional tables**, each with a primary key that is being referenced from the fact table.
 
 
-#### Fact Table
-**songplays** - records in log data associated with song plays i.e. records with page NextSong
-- songplay_id (INT) PRIMARY KEY: ID of each user song play 
-- start_time (DATE) NOT NULL: Timestamp of beggining of user activity
-- user_id (INT) NOT NULL: ID of user
-- level (TEXT): User level {free | paid}
-- song_id (TEXT) NOT NULL: ID of Song played
-- artist_id (TEXT) NOT NULL: ID of Artist of the song played
-- session_id (INT): ID of the user Session 
-- location (TEXT): User location 
-- user_agent (TEXT): Agent used by user to access Sparkify platform
+### Fact Table
 
-#### Dimension Tables
-**users** - users in the app
-- user_id (INT) PRIMARY KEY: ID of user
-- first_name (TEXT) NOT NULL: Name of user
-- last_name (TEXT) NOT NULL: Last Name of user
-- gender (TEXT): Gender of user {M | F}
-- level (TEXT): User level {free | paid}
+1. **songplays** - records in log data associated with song plays, i.e., records with
+  page `NextSong`
+    - *songplay_id, start_time, user_id, level, song_id, artist_id, session_id,
+      location, user_agent*
 
-**songs** - songs in music database
-- song_id (TEXT) PRIMARY KEY: ID of Song
-- title (TEXT) NOT NULL: Title of Song
-- artist_id (TEXT) NOT NULL: ID of song Artist
-- year (INT): Year of song release
-- duration (FLOAT) NOT NULL: Song duration in milliseconds
+<a id="dim"></a>
 
-**artists** - artists in music database
-- artist_id (TEXT) PRIMARY KEY: ID of Artist
-- name (TEXT) NOT NULL: Name of Artist
-- location (TEXT): Name of Artist city
-- lattitude (FLOAT): Lattitude location of artist
-- longitude (FLOAT): Longitude location of artist
+### Dimension Tables
 
-**time** - timestamps of records in songplays broken down into specific units
-- start_time (DATE) PRIMARY KEY: Timestamp of row
-- hour (INT): Hour associated to start_time
-- day (INT): Day associated to start_time
-- week (INT): Week of year associated to start_time
-- month (INT): Month associated to start_time 
-- year (INT): Year associated to start_time
-- weekday (TEXT): Name of week day associated to start_time
+2. **users** - Following information about users:
+    - *user_id, first_name, last_name, gender, level*
+
+3. **songs** - Following info about songs:
+    - *song_id, title, artist_id, year, duration*
+
+4. **artists** - Artists information:
+    - *artist_id, name, location, latitude, longitude*
+
+5. **time** - timestamps of records in **songplays** broken down into specific units
+    - *start_time, hour, day, week, month, year, weekday*
+
+In order to create these tables, all we need to do is perform some transformation in the data which are already in song_data and log_data directory.
 
 3 Run etl in console, and verify results:
  ```
